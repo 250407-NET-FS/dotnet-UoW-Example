@@ -1,0 +1,14 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\RepoWithUoW.Domain\RepoWithUoW.Domain.csproj" />
+    <ProjectReference Include="..\RepoWithUoW.Repo\RepoWithUoW.Repo.csproj" />
+  </ItemGroup>
+
+</Project>
