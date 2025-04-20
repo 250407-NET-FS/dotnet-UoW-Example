@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("RepoWithUoW.Service")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ea229926c66dc3de813aea4e88e771ec52041e4c")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+9c9f1f0bcbeff8ce015c0b328f0123a1186e62af")]
 [assembly: System.Reflection.AssemblyProductAttribute("RepoWithUoW.Service")]
 [assembly: System.Reflection.AssemblyTitleAttribute("RepoWithUoW.Service")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

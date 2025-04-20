@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace RepoWithUoW.Repo;
 
-public class OpportunityRepo_Impl : IOpportunityRepo
+public class OpportunityRepo_Impl : IOpportunityRepo, IDisposable
 {
 
     private readonly SalesDbContext _context;
@@ -40,8 +40,13 @@ public class OpportunityRepo_Impl : IOpportunityRepo
         return oppList;
     }
 
-    public async Task Save() 
+     public async Task Save() 
     {
         await _context.SaveChangesAsync();
+    }
+
+    public void Dispose()
+    {
+        _context?.Dispose();
     }
 }

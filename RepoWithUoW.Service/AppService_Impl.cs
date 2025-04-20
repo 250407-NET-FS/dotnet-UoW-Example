@@ -7,52 +7,53 @@ using RepoWithUoW.Repo;
 public class AppService_Impl : IAppService
 {
 
-    private readonly IAccountRepo _accRepo;
-    private readonly IOpportunityRepo _oppRepo;
+    private readonly IUnitOfWork _unitOfWork;
 
-    public AppService_Impl(IAccountRepo accRepo, IOpportunityRepo oppRepo) 
+    public AppService_Impl(IUnitOfWork unitOfWork) 
     {
-        _accRepo = accRepo;
-        _oppRepo = oppRepo;
+        _unitOfWork = unitOfWork;
     }
 
     public async Task<Account> AddAccountAsync(Account acc)
     {
-        await _accRepo.AddAccountAsync(acc);
-        await _accRepo.Save();
+        await _unitOfWork.BeginTransaction();
+        await _unitOfWork.AccountRepo.AddAccountAsync(acc);
+        await _unitOfWork.CommitAsync();
         return acc;
     }
 
     public async Task<Account> DeleteAccountAsync(Account acc)
     {
-        
-        await _accRepo.DeleteAccountAsync(acc);
-        await _accRepo.Save();
+        await _unitOfWork.BeginTransaction();
+        await _unitOfWork.AccountRepo.DeleteAccountAsync(acc);
+        await _unitOfWork.CommitAsync();
         return acc;
     }
 
     public async Task<List<Account>> GetAccountsAsync()
     {
-        return await _accRepo.GetAllAccountsAsync();
+        return await _unitOfWork.AccountRepo.GetAllAccountsAsync();
     }
 
     public async Task<Opportunity> AddOpportunityAsync(Opportunity opp)
     {
-        await _oppRepo.AddOpportunityAsync(opp);
-        await _oppRepo.Save();
+        await _unitOfWork.BeginTransaction();
+        await _unitOfWork.OpportunityRepo.AddOpportunityAsync(opp);
+        await _unitOfWork.CommitAsync();
         return opp;
     }
 
     public async Task<Opportunity> DeleteOpportunityAsync(Opportunity opp)
     {
-        await _oppRepo.DeleteOpportunityAsync(opp);
-        await _oppRepo.Save();
+        await _unitOfWork.BeginTransaction();
+        await _unitOfWork.OpportunityRepo.DeleteOpportunityAsync(opp);
+        await _unitOfWork.CommitAsync();
         return opp;
     }
 
     public async Task<List<Opportunity>> GetOpportunitiesAsync()
     {   
-        return await _oppRepo.GetAllOpportunitiesAsync();
+        return await _unitOfWork.OpportunityRepo.GetAllOpportunitiesAsync();
     }
 
 
@@ -60,13 +61,10 @@ public class AppService_Impl : IAppService
 
     public async Task<Dictionary<Account, List<Opportunity>>> NewAccountOnboarding(Account acc, Opportunity opp) 
     {
-
-        await _accRepo.AddAccountAsync(acc);
-        await _accRepo.Save();
-
-
-        await _oppRepo.AddOpportunityAsync(opp);
-        await _oppRepo.Save();
+        await _unitOfWork.BeginTransaction(); 
+        await _unitOfWork.AccountRepo.AddAccountAsync(acc);
+        await _unitOfWork.OpportunityRepo.AddOpportunityAsync(opp);
+        await _unitOfWork.CommitAsync();
 
         return new Dictionary<Account, List<Opportunity>>()
         {

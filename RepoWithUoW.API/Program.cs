@@ -11,7 +11,6 @@ using Microsoft.EntityFrameworkCore;
 // if even one is missing, we will get errors later about inferred body params
 // apparently in .NET 7+ minimal APIs no longer infer complex types from the body by default 
 using Microsoft.AspNetCore.Mvc;
-using System.Collections.Specialized;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -27,10 +26,17 @@ string conn_string = File.ReadAllText("./conn_string.env");
 builder.Services.AddDbContext<AccountDbContext>(options => options.UseSqlServer(conn_string));
 builder.Services.AddDbContext<SalesDbContext>(options => options.UseSqlServer(conn_string));
 
+
+// repositories
 builder.Services.AddScoped<IAccountRepo, AccountRepo_Impl>();
 builder.Services.AddScoped<IOpportunityRepo, OpportunityRepo_Impl>();
 
+
+// services 
 builder.Services.AddScoped<IAppService, AppService_Impl>();
+
+// unit of work
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 var app = builder.Build();
 
@@ -119,6 +125,7 @@ app.MapDelete(
 // HttpRequest object and parse out everything manually
 // this demonstrates data inconsistency without a unit of work
 // We can call this endpoint and the account will always insert even if the opp fails to insert
+// this is resolved now with our unit of work:
 app.MapPost(
     "/onboarding",
     async ( HttpRequest request, IAppService service) =>

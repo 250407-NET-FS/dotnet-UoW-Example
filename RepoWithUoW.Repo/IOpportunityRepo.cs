@@ -2,7 +2,7 @@ using RepoWithUoW.Domain;
 
 namespace RepoWithUoW.Repo;
 
-public interface IOpportunityRepo
+public interface IOpportunityRepo : IDisposable
 {
 
     
@@ -15,4 +15,6 @@ public interface IOpportunityRepo
     public Task<List<Opportunity>> AddOpportunityListAsync(List<Opportunity> oppList);
 
     public Task Save();
+
+    
 }

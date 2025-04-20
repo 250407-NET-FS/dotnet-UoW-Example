@@ -2,7 +2,7 @@ using RepoWithUoW.Domain;
 
 namespace RepoWithUoW.Repo;
 
-public interface IAccountRepo
+public interface IAccountRepo : IDisposable
 {
 
     public Task<Account> AddAccountAsync(Account acc);
