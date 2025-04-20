@@ -2,7 +2,7 @@ using RepoWithUoW.Domain;
 
 namespace RepoWithUoW.Repo;
 
-public interface IOpportunityRepo
+public interface IOpportunityRepo : IDisposable
 {
 
     

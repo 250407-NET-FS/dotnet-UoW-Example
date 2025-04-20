@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace RepoWithUoW.Repo;
 
-public class AccountRepo_Impl : IAccountRepo
+public class AccountRepo_Impl : IAccountRepo, IDisposable
 {
   
     private readonly AccountDbContext _context;
@@ -35,5 +35,10 @@ public class AccountRepo_Impl : IAccountRepo
     public async Task Save() 
     {
         await _context.SaveChangesAsync();
+    }
+
+    public void Dispose() 
+    {
+        _context.Dispose();
     }
 }

@@ -11,7 +11,6 @@ using Microsoft.EntityFrameworkCore;
 // if even one is missing, we will get errors later about inferred body params
 // apparently in .NET 7+ minimal APIs no longer infer complex types from the body by default 
 using Microsoft.AspNetCore.Mvc;
-using System.Collections.Specialized;
 
 var builder = WebApplication.CreateBuilder(args);
 
