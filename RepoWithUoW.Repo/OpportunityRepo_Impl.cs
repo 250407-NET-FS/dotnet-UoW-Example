@@ -40,6 +40,11 @@ public class OpportunityRepo_Impl : IOpportunityRepo, IDisposable
         return oppList;
     }
 
+     public async Task<Opportunity> GetOpportunityById(string id)
+    {
+        return _context.Opportunity.ToList().Find(a => a.Id == id)!;
+    }
+
      public async Task Save() 
     {
         await _context.SaveChangesAsync();

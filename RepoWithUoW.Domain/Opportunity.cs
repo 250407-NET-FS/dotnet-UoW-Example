@@ -18,5 +18,6 @@ public class Opportunity
     public required string AccountId { get; set; }
 
     // this is necessarily required, but it helps EF traverse the relationship/setup AccountId foreign key
-    public Account? account { get; set; }
+    public Account? account { get; set; } 
+    //public int Amount { get; set; }
 }

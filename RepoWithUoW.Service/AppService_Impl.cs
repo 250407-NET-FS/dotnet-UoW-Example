@@ -57,7 +57,15 @@ public class AppService_Impl : IAppService
     }
 
 
+    public async Task<Account> GetAccountById(string id)
+    {
+        return await _unitOfWork.AccountRepo.GetAccountById(id);
+    }
 
+     public async Task<Opportunity> GetOpportunityById(string id)
+    {
+        return await _unitOfWork.OpportunityRepo.GetOpportunityById(id);
+    }
 
     public async Task<Dictionary<Account, List<Opportunity>>> NewAccountOnboarding(Account acc, Opportunity opp) 
     {

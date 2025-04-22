@@ -11,5 +11,7 @@ public interface IAccountRepo : IDisposable
 
     public Task<List<Account>> GetAllAccountsAsync();
 
+    public Task<Account> GetAccountById(string id);
+
     public Task Save();
 }

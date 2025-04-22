@@ -1,7 +1,6 @@
 // rationale for multiple DbContexts:
 // https://www.milanjovanovic.tech/blog/using-multiple-ef-core-dbcontext-in-single-application
 
-
 using RepoWithUoW.Service;
 using RepoWithUoW.Domain;
 using RepoWithUoW.Repo;
@@ -13,6 +12,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
 
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddControllers();
 
 //Loading the string from my env file - HINT: There are other ways to do this
 //Things like Secrets, AppSettings (don't forget to edit your gitignore for this one)
@@ -43,111 +43,113 @@ var app = builder.Build();
 
 app.UseHttpsRedirection();
 
-
-// get all methods for each entity type
-app.MapGet(
-    "/accounts", 
-    async (IAppService service) => 
-    {
-        List<Account> accList = await service.GetAccountsAsync();
-        return Results.Ok(accList.Select(a => a.ToDTO()).ToList());
-    }
-);
-
-app.MapGet(
-    "/opportunities", 
-    async (IAppService service) => 
-    {
-        List<Opportunity> oppList = await service.GetOpportunitiesAsync();
-        return Results.Ok(oppList.Select(o => o.ToDTO()).ToList());
-    }
-);
+app.MapControllers();
 
 
-// create individual post method for each entity type
-app.MapPost(
-    "/account",
-    async ( [FromBody] Account acc, IAppService service) =>
-    {
-        await service.AddAccountAsync(acc);
-        return Results.Created($"/account/{acc.Id}", new AccountDTO(){
-            Id = acc.Id,
-            Name = acc.Name
-        });
-    }
-);
+// // get all methods for each entity type
+// app.MapGet(
+//     "/accounts", 
+//     async (IAppService service) => 
+//     {
+//         List<Account> accList = await service.GetAccountsAsync();
+//         return Results.Ok(accList.Select(a => a.ToDTO()).ToList());
+//     }
+// );
 
-app.MapPost(
-    "/opportunity",
-    async ( [FromBody] Opportunity opp, IAppService service) =>
-    {
-        await service.AddOpportunityAsync(opp);
-        return Results.Created($"/opportunity/{opp.Id}", new OpportunityDTO(){
-            Id = opp.Id,
-            Name = opp.Name,
-            AccountId = opp.AccountId
-        });
-    }
-);
+// app.MapGet(
+//     "/opportunities", 
+//     async (IAppService service) => 
+//     {
+//         List<Opportunity> oppList = await service.GetOpportunitiesAsync();
+//         return Results.Ok(oppList.Select(o => o.ToDTO()).ToList());
+//     }
+// );
 
 
-// delete individual post methods for each entity type
-app.MapDelete(
-    "/account",
-    async ( [FromBody] Account acc, IAppService service) =>
-    {
-        await service.DeleteAccountAsync(acc);
-        return Results.Ok(new AccountDTO(){
-            Id = acc.Id,
-            Name = acc.Name
-        });
-    }
+// // create individual post method for each entity type
+// app.MapPost(
+//     "/account",
+//     async ( [FromBody] Account acc, IAppService service) =>
+//     {
+//         await service.AddAccountAsync(acc);
+//         return Results.Created($"/account/{acc.Id}", new AccountDTO(){
+//             Id = acc.Id,
+//             Name = acc.Name
+//         });
+//     }
+// );
 
-);
-
-app.MapDelete(
-    "/opportunity",
-    async ( [FromBody] Opportunity opp, IAppService service) =>
-    {
-        await service.DeleteOpportunityAsync(opp);
-        return Results.Ok(new OpportunityDTO(){
-            Id = opp.Id,
-            Name = opp.Name,
-            AccountId = opp.AccountId
-        });
-    }
-
-);
+// app.MapPost(
+//     "/opportunity",
+//     async ( [FromBody] Opportunity opp, IAppService service) =>
+//     {
+//         await service.AddOpportunityAsync(opp);
+//         return Results.Created($"/opportunity/{opp.Id}", new OpportunityDTO(){
+//             Id = opp.Id,
+//             Name = opp.Name,
+//             AccountId = opp.AccountId
+//         });
+//     }
+// );
 
 
-// onboarding method. creates parent and child record in one operation 
-// FromBody only works for one parameter at most. So we need to use the 
-// HttpRequest object and parse out everything manually
-// this demonstrates data inconsistency without a unit of work
-// We can call this endpoint and the account will always insert even if the opp fails to insert
-// this is resolved now with our unit of work:
-app.MapPost(
-    "/onboarding",
-    async ( HttpRequest request, IAppService service) =>
-    {
-         // Extract parameters from the query string
-        string accName = request.Query["AccountName"]!;
-        string oppName = request.Query["OpportunityName"]!;
+// // delete individual post methods for each entity type
+// app.MapDelete(
+//     "/account",
+//     async ( [FromBody] Account acc, IAppService service) =>
+//     {
+//         await service.DeleteAccountAsync(acc);
+//         return Results.Ok(new AccountDTO(){
+//             Id = acc.Id,
+//             Name = acc.Name
+//         });
+//     }
 
-        Account acc = new() { Name = accName };
-        Opportunity opp = new() { Name = oppName, AccountId = acc.Id };
+// );
 
-        await service.NewAccountOnboarding(acc, opp);
+// app.MapDelete(
+//     "/opportunity",
+//     async ( [FromBody] Opportunity opp, IAppService service) =>
+//     {
+//         await service.DeleteOpportunityAsync(opp);
+//         return Results.Ok(new OpportunityDTO(){
+//             Id = opp.Id,
+//             Name = opp.Name,
+//             AccountId = opp.AccountId
+//         });
+//     }
 
-        return Results.Created($"/account/{acc.Id}", new AccountDTO()
-        {
-            Id = acc.Id,
-            Name = acc.Name
-        });
+// );
 
-    }
 
-);
+// // onboarding method. creates parent and child record in one operation 
+// // FromBody only works for one parameter at most. So we need to use the 
+// // HttpRequest object and parse out everything manually
+// // this demonstrates data inconsistency without a unit of work
+// // We can call this endpoint and the account will always insert even if the opp fails to insert
+// // this is resolved now with our unit of work:
+// app.MapPost(
+//     "/onboarding",
+//     async ( HttpRequest request, IAppService service) =>
+//     {
+//          // Extract parameters from the query string
+//         string accName = request.Query["AccountName"]!;
+//         string oppName = request.Query["OpportunityName"]!;
+
+//         Account acc = new() { Name = accName };
+//         Opportunity opp = new() { Name = oppName, AccountId = acc.Id };
+
+//         await service.NewAccountOnboarding(acc, opp);
+
+//         return Results.Created($"/account/{acc.Id}", new AccountDTO()
+//         {
+//             Id = acc.Id,
+//             Name = acc.Name
+//         });
+
+//     }
+
+// );
 
 
 app.Run();

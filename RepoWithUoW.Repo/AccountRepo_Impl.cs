@@ -32,6 +32,11 @@ public class AccountRepo_Impl : IAccountRepo, IDisposable
         return acc;
     }
 
+    public async Task<Account> GetAccountById(string id)
+    {
+        return _context.Account.ToList().Find(a => a.Id == id)!;
+    }
+
     public async Task Save() 
     {
         await _context.SaveChangesAsync();

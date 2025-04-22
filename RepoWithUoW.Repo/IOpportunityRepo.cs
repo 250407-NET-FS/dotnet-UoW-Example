@@ -14,6 +14,8 @@ public interface IOpportunityRepo : IDisposable
 
     public Task<List<Opportunity>> AddOpportunityListAsync(List<Opportunity> oppList);
 
+    public Task<Opportunity> GetOpportunityById(string Id);
+
     public Task Save();
 
     
