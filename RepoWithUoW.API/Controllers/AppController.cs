@@ -98,14 +98,15 @@ public class AppController : ControllerBase
     }
 
     [HttpPost("onboarding")]
-    public async Task<IActionResult> Onboarding(HttpRequest request)
+    public async Task<IActionResult> Onboarding()
     {
         try
         {
-            // Extract parameters from the query string
-            string accName = request.Query["AccountName"]!;
-            string oppName = request.Query["OpportunityName"]!;
-
+            // Access the HttpRequest object directly from HttpContext
+            var routeValues = HttpContext.Request.RouteValues;
+            var accName = HttpContext.Request.Query["AccountName"].ToString();
+            var oppName = HttpContext.Request.Query["OpportunityName"].ToString();
+           
 
             Account acc = new() { Name = accName };
             Opportunity opp = new() { Name = oppName, AccountId = acc.Id };

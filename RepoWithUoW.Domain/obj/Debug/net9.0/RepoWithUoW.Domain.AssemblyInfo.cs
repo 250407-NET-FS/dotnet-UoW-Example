@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("RepoWithUoW.Domain")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+3fe95494b27b60027f676eee4f3b9d1192c70451")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+fbdf3dd20d35f418f235ce231c36aef08f877806")]
 [assembly: System.Reflection.AssemblyProductAttribute("RepoWithUoW.Domain")]
 [assembly: System.Reflection.AssemblyTitleAttribute("RepoWithUoW.Domain")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
