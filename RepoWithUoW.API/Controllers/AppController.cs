@@ -3,6 +3,9 @@ namespace  RepoWithUoW.API;
 using Microsoft.AspNetCore.Mvc;
 using RepoWithUoW.Service;
 using RepoWithUoW.Domain;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Cors;
 
 [ApiController]
 [Route("[controller]")]
@@ -16,6 +19,8 @@ public class AppController : ControllerBase
         _service = service;
     }
 
+    [EnableCors("Development")]
+    [Authorize(Roles = "Admin")]
     [HttpGet("accounts")]
     public async Task<IActionResult> GetAllAccounts()
     {
@@ -29,7 +34,8 @@ public class AppController : ControllerBase
         }
     }
 
-    
+    [EnableCors("Development")]
+    [Authorize(Roles = "Admin")] 
     [HttpPost("account")]
     public async Task<IActionResult> CreateAccount(Account acc)
     {
@@ -43,6 +49,8 @@ public class AppController : ControllerBase
         }
     }
 
+    [EnableCors("Development")]
+    [Authorize(Roles = "Admin")]
     [HttpDelete("account")]
     public async Task<IActionResult> DeleteAccount(Account acc)
     {
@@ -56,6 +64,8 @@ public class AppController : ControllerBase
         }
     }
 
+    [EnableCors("Development")]
+    [Authorize(Roles = "Admin")]
     [HttpGet("opportunities")]
     public async Task<IActionResult> GetAllOpportunities()
     {
@@ -69,7 +79,8 @@ public class AppController : ControllerBase
         }
     }
 
-    
+    [EnableCors("Development")]
+    [Authorize(Roles = "Admin")]
     [HttpPost("opportunity")]
     public async Task<IActionResult> CreateOpportunity(Opportunity opp)
     {
@@ -84,6 +95,8 @@ public class AppController : ControllerBase
         }
     }
 
+    [EnableCors("Development")]
+    [Authorize(Roles = "Admin")]
     [HttpDelete("opportunity")]
     public async Task<IActionResult> DeleteOpportunity(Opportunity opp)
     {
@@ -97,6 +110,8 @@ public class AppController : ControllerBase
         }
     }
 
+    [EnableCors("Development")]
+    [Authorize(Roles = "Admin")]
     [HttpPost("onboarding")]
     public async Task<IActionResult> Onboarding()
     {

@@ -1,10 +1,12 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using RepoWithUoW.Domain;
 
 
 namespace RepoWithUoW.Repo;
 
-public class AccountDbContext : DbContext
+public class AccountDbContext : IdentityDbContext<User, IdentityRole, string>
 {
     //Your DbContext needs a constructor - this constructor takes a special argument of type
     //DbContextOptions - we need to call the base (parent) constructor since it is the one

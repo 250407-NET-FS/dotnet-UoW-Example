@@ -4,6 +4,12 @@
 using RepoWithUoW.Service;
 using RepoWithUoW.Repo;
 using Microsoft.EntityFrameworkCore;
+using RepoWithUoW.Domain;
+using Microsoft.AspNetCore.Identity;
+using System.Text;
+using Microsoft.IdentityModel.Tokens;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using RepoWithUoW.API;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
@@ -28,15 +34,104 @@ builder.Services.AddScoped<IOpportunityRepo, OpportunityRepo_Impl>();
 
 // services 
 builder.Services.AddScoped<IAppService, AppService_Impl>();
+builder.Services.AddScoped<IAuthService, AuthService_Impl>();
 
 // unit of work
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+
+builder.Services.AddIdentityCore<User>(options => 
+{
+
+    options.Password.RequireDigit = true;
+    options.Password.RequiredLength = 8;
+    options.Password.RequireNonAlphanumeric = true;
+    options.Password.RequireUppercase = true;
+})
+.AddRoles<IdentityRole>()
+.AddEntityFrameworkStores<AccountDbContext>()
+.AddSignInManager<SignInManager<User>>();
+
+var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]));
+builder.Services.AddAuthentication(options => 
+{
+   options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+   options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme; 
+   
+})
+.AddJwtBearer(options => 
+{
+    options.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidateIssuerSigningKey = true,
+        IssuerSigningKey = key,
+        ValidateIssuer = true,
+        ValidIssuer = builder.Configuration["Jwt:Issuer"],
+        ValidateAudience = true,
+        ValidAudience = builder.Configuration["Jwt:Audience"],
+        ValidateLifetime = true,
+        ClockSkew = TimeSpan.Zero
+    };
+
+     options.Events = new JwtBearerEvents
+    {
+        OnMessageReceived = context =>
+        {
+            // Example: Read token from cookies or custom headers
+            if (context.Request.Cookies.ContainsKey("AuthToken"))
+            {
+                context.Token = context.Request.Cookies["AuthToken"];
+            }
+            return Task.CompletedTask;
+        }
+    };
+});
+
+builder.Services.AddAuthorization();
+
+builder.Services.AddCors(options => 
+{
+    options.AddPolicy(
+        "Development",
+        policy => 
+        {
+            policy.WithOrigins("http://127.0.0.1:5500")
+            .AllowAnyHeader()
+            .AllowAnyMethod()
+            .AllowCredentials();
+        }
+    );
+});
 
 var app = builder.Build();
 
 
 app.UseHttpsRedirection();
+app.UseCors("Development");
+
+
+app.UseAuthorization();
+
+//Below UseAuthorization, Im going to call my RolesInitializer's method
+//and seed my user roles. After this runs once, I will comment it out to avoid any issues.
+
+// using (var scope = app.Services.CreateScope())
+// {
+//     var services = scope.ServiceProvider;
+
+//     try
+//     {
+//         await RolesInitalizer.SeedRoles(services);
+//     }
+//     catch (Exception ex)
+//     {
+//         var logger = services.GetRequiredService<ILogger<Program>>();
+//         logger.LogError(ex, "Error seeding roles");
+//     }
+// }
+
 
 app.MapControllers();
+
+
 
 app.Run();

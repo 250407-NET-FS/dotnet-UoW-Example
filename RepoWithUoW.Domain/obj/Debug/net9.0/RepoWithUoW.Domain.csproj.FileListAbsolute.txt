@@ -21,3 +21,4 @@ C:\Users\EthanWilson\Git_Repos\dotnet_projects\dotnet-UoW-Example\RepoWithUoW.Do
 C:\Users\EthanWilson\Git_Repos\dotnet_projects\dotnet-UoW-Example\RepoWithUoW.Domain\obj\Debug\net9.0\refint\RepoWithUoW.Domain.dll
 C:\Users\EthanWilson\Git_Repos\dotnet_projects\dotnet-UoW-Example\RepoWithUoW.Domain\obj\Debug\net9.0\RepoWithUoW.Domain.pdb
 C:\Users\EthanWilson\Git_Repos\dotnet_projects\dotnet-UoW-Example\RepoWithUoW.Domain\obj\Debug\net9.0\ref\RepoWithUoW.Domain.dll
+C:\Users\EthanWilson\Git_Repos\dotnet_projects\dotnet-UoW-Example\RepoWithUoW.Domain\obj\Debug\net9.0\RepoWithUoW.Domain.csproj.AssemblyReference.cache
