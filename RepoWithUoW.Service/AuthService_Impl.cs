@@ -62,9 +62,6 @@ public class AuthService_Impl : IAuthService
             Audience = _config["Jwt:Audience"]
         };
 
-        var handler = new JsonWebTokenHandler();
-        string token = handler.CreateToken(tokenDescriptor);
-
-        return token;
+        return new JsonWebTokenHandler().CreateToken(tokenDescriptor);
     }
 }
