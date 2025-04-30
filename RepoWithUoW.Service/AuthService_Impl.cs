@@ -3,6 +3,7 @@ using System.Security.Claims;
 using System.Text;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
+using Microsoft.IdentityModel.JsonWebTokens;
 using Microsoft.IdentityModel.Tokens;
 using RepoWithUoW.Domain;
 
@@ -26,9 +27,9 @@ public class AuthService_Impl : IAuthService
 
         var claims = new List<Claim>
         {
-            new Claim(ClaimTypes.Name, u.UserName),
+            new Claim(ClaimTypes.Name, u.UserName!),
             new Claim(ClaimTypes.NameIdentifier, u.Id),
-            new Claim(ClaimTypes.Email, u.Email)
+            new Claim(ClaimTypes.Email, u.Email!)
         };
 
         var roles = await _userManager.GetRolesAsync(u);
@@ -38,14 +39,32 @@ public class AuthService_Impl : IAuthService
         var jwtKey = _config["Jwt:Key"] ?? throw new InvalidOperationException("Jwt Key not configured");
         var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtKey));
         var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
-        var token = new JwtSecurityToken(
-            issuer: _config["Jwt:Issuer"],
-            audience: _config["Jwt:Audience"],
-            claims: claims,
-            expires: DateTime.UtcNow.AddDays(Double.Parse(_config["Jwt:ExpireDays"])),
-            signingCredentials: creds
-        );
+        
+        
+        // the following is the old way and is less performant: 
+        // var token = new JwtSecurityToken(
+        //     issuer: _config["Jwt:Issuer"],
+        //     audience: _config["Jwt:Audience"],
+        //     claims: claims,
+        //     expires: DateTime.UtcNow.AddDays(Double.Parse(_config["Jwt:ExpireDays"])),
+        //     signingCredentials: creds
+        // );
 
-        return new JwtSecurityTokenHandler().WriteToken(token);
+        // return new JwtSecurityTokenHandler().WriteToken(token);
+
+        // new way to generate JWTs
+        var tokenDescriptor = new SecurityTokenDescriptor
+        {
+            Subject = new ClaimsIdentity(claims),
+            Expires = DateTime.UtcNow.AddMinutes(Double.Parse(_config["Jwt:ExpirationInMinutes"]!)),
+            SigningCredentials = creds,
+            Issuer = _config["Jwt:Issuer"],
+            Audience = _config["Jwt:Audience"]
+        };
+
+        var handler = new JsonWebTokenHandler();
+        string token = handler.CreateToken(tokenDescriptor);
+
+        return token;
     }
 }
