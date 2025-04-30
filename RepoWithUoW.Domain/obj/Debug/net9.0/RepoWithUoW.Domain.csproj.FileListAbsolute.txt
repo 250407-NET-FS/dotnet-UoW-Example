@@ -12,6 +12,7 @@ C:\Users\EthanWilson\Git_Repos\dotnet_projects\RepoPattern_with_Unit_of_Work\Rep
 C:\Users\EthanWilson\Git_Repos\dotnet_projects\dotnet-UoW-Example\RepoWithUoW.Domain\bin\Debug\net9.0\RepoWithUoW.Domain.deps.json
 C:\Users\EthanWilson\Git_Repos\dotnet_projects\dotnet-UoW-Example\RepoWithUoW.Domain\bin\Debug\net9.0\RepoWithUoW.Domain.dll
 C:\Users\EthanWilson\Git_Repos\dotnet_projects\dotnet-UoW-Example\RepoWithUoW.Domain\bin\Debug\net9.0\RepoWithUoW.Domain.pdb
+C:\Users\EthanWilson\Git_Repos\dotnet_projects\dotnet-UoW-Example\RepoWithUoW.Domain\obj\Debug\net9.0\RepoWithUoW.Domain.csproj.AssemblyReference.cache
 C:\Users\EthanWilson\Git_Repos\dotnet_projects\dotnet-UoW-Example\RepoWithUoW.Domain\obj\Debug\net9.0\RepoWithUoW.Domain.GeneratedMSBuildEditorConfig.editorconfig
 C:\Users\EthanWilson\Git_Repos\dotnet_projects\dotnet-UoW-Example\RepoWithUoW.Domain\obj\Debug\net9.0\RepoWithUoW.Domain.AssemblyInfoInputs.cache
 C:\Users\EthanWilson\Git_Repos\dotnet_projects\dotnet-UoW-Example\RepoWithUoW.Domain\obj\Debug\net9.0\RepoWithUoW.Domain.AssemblyInfo.cs
@@ -21,4 +22,3 @@ C:\Users\EthanWilson\Git_Repos\dotnet_projects\dotnet-UoW-Example\RepoWithUoW.Do
 C:\Users\EthanWilson\Git_Repos\dotnet_projects\dotnet-UoW-Example\RepoWithUoW.Domain\obj\Debug\net9.0\refint\RepoWithUoW.Domain.dll
 C:\Users\EthanWilson\Git_Repos\dotnet_projects\dotnet-UoW-Example\RepoWithUoW.Domain\obj\Debug\net9.0\RepoWithUoW.Domain.pdb
 C:\Users\EthanWilson\Git_Repos\dotnet_projects\dotnet-UoW-Example\RepoWithUoW.Domain\obj\Debug\net9.0\ref\RepoWithUoW.Domain.dll
-C:\Users\EthanWilson\Git_Repos\dotnet_projects\dotnet-UoW-Example\RepoWithUoW.Domain\obj\Debug\net9.0\RepoWithUoW.Domain.csproj.AssemblyReference.cache

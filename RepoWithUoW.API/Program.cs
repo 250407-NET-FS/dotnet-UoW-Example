@@ -69,7 +69,7 @@ builder.Services.AddAuthentication(options =>
         ValidateAudience = true,
         ValidAudience = builder.Configuration["Jwt:Audience"],
         ValidateLifetime = true,
-        ClockSkew = TimeSpan.Zero
+        ClockSkew = TimeSpan.Zero // ensures that we can't create tokens with expiration in the past
     };
 
      options.Events = new JwtBearerEvents
@@ -107,7 +107,7 @@ var app = builder.Build();
 
 app.UseHttpsRedirection();
 app.UseCors("Development");
-
+//app.UseAuthentication();
 
 app.UseAuthorization();
 

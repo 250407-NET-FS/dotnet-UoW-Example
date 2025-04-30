@@ -180,6 +180,10 @@ C:\Users\EthanWilson\Git_Repos\dotnet_projects\dotnet-UoW-Example\RepoWithUoW.AP
 C:\Users\EthanWilson\Git_Repos\dotnet_projects\dotnet-UoW-Example\RepoWithUoW.API\bin\Debug\net9.0\Azure.Core.dll
 C:\Users\EthanWilson\Git_Repos\dotnet_projects\dotnet-UoW-Example\RepoWithUoW.API\bin\Debug\net9.0\Azure.Identity.dll
 C:\Users\EthanWilson\Git_Repos\dotnet_projects\dotnet-UoW-Example\RepoWithUoW.API\bin\Debug\net9.0\Humanizer.dll
+C:\Users\EthanWilson\Git_Repos\dotnet_projects\dotnet-UoW-Example\RepoWithUoW.API\bin\Debug\net9.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\Users\EthanWilson\Git_Repos\dotnet_projects\dotnet-UoW-Example\RepoWithUoW.API\bin\Debug\net9.0\Microsoft.AspNetCore.Cryptography.Internal.dll
+C:\Users\EthanWilson\Git_Repos\dotnet_projects\dotnet-UoW-Example\RepoWithUoW.API\bin\Debug\net9.0\Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
+C:\Users\EthanWilson\Git_Repos\dotnet_projects\dotnet-UoW-Example\RepoWithUoW.API\bin\Debug\net9.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
 C:\Users\EthanWilson\Git_Repos\dotnet_projects\dotnet-UoW-Example\RepoWithUoW.API\bin\Debug\net9.0\Microsoft.AspNetCore.OpenApi.dll
 C:\Users\EthanWilson\Git_Repos\dotnet_projects\dotnet-UoW-Example\RepoWithUoW.API\bin\Debug\net9.0\Microsoft.Bcl.AsyncInterfaces.dll
 C:\Users\EthanWilson\Git_Repos\dotnet_projects\dotnet-UoW-Example\RepoWithUoW.API\bin\Debug\net9.0\Microsoft.Build.Locator.dll
@@ -201,6 +205,8 @@ C:\Users\EthanWilson\Git_Repos\dotnet_projects\dotnet-UoW-Example\RepoWithUoW.AP
 C:\Users\EthanWilson\Git_Repos\dotnet_projects\dotnet-UoW-Example\RepoWithUoW.API\bin\Debug\net9.0\Microsoft.Extensions.DependencyInjection.dll
 C:\Users\EthanWilson\Git_Repos\dotnet_projects\dotnet-UoW-Example\RepoWithUoW.API\bin\Debug\net9.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
 C:\Users\EthanWilson\Git_Repos\dotnet_projects\dotnet-UoW-Example\RepoWithUoW.API\bin\Debug\net9.0\Microsoft.Extensions.DependencyModel.dll
+C:\Users\EthanWilson\Git_Repos\dotnet_projects\dotnet-UoW-Example\RepoWithUoW.API\bin\Debug\net9.0\Microsoft.Extensions.Identity.Core.dll
+C:\Users\EthanWilson\Git_Repos\dotnet_projects\dotnet-UoW-Example\RepoWithUoW.API\bin\Debug\net9.0\Microsoft.Extensions.Identity.Stores.dll
 C:\Users\EthanWilson\Git_Repos\dotnet_projects\dotnet-UoW-Example\RepoWithUoW.API\bin\Debug\net9.0\Microsoft.Extensions.Logging.dll
 C:\Users\EthanWilson\Git_Repos\dotnet_projects\dotnet-UoW-Example\RepoWithUoW.API\bin\Debug\net9.0\Microsoft.Extensions.Logging.Abstractions.dll
 C:\Users\EthanWilson\Git_Repos\dotnet_projects\dotnet-UoW-Example\RepoWithUoW.API\bin\Debug\net9.0\Microsoft.Extensions.Options.dll
@@ -341,9 +347,3 @@ C:\Users\EthanWilson\Git_Repos\dotnet_projects\dotnet-UoW-Example\RepoWithUoW.AP
 C:\Users\EthanWilson\Git_Repos\dotnet_projects\dotnet-UoW-Example\RepoWithUoW.API\obj\Debug\net9.0\RepoWithUoW.API.pdb
 C:\Users\EthanWilson\Git_Repos\dotnet_projects\dotnet-UoW-Example\RepoWithUoW.API\obj\Debug\net9.0\RepoWithUoW.API.genruntimeconfig.cache
 C:\Users\EthanWilson\Git_Repos\dotnet_projects\dotnet-UoW-Example\RepoWithUoW.API\obj\Debug\net9.0\ref\RepoWithUoW.API.dll
-C:\Users\EthanWilson\Git_Repos\dotnet_projects\dotnet-UoW-Example\RepoWithUoW.API\bin\Debug\net9.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
-C:\Users\EthanWilson\Git_Repos\dotnet_projects\dotnet-UoW-Example\RepoWithUoW.API\bin\Debug\net9.0\Microsoft.AspNetCore.Cryptography.Internal.dll
-C:\Users\EthanWilson\Git_Repos\dotnet_projects\dotnet-UoW-Example\RepoWithUoW.API\bin\Debug\net9.0\Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
-C:\Users\EthanWilson\Git_Repos\dotnet_projects\dotnet-UoW-Example\RepoWithUoW.API\bin\Debug\net9.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
-C:\Users\EthanWilson\Git_Repos\dotnet_projects\dotnet-UoW-Example\RepoWithUoW.API\bin\Debug\net9.0\Microsoft.Extensions.Identity.Core.dll
-C:\Users\EthanWilson\Git_Repos\dotnet_projects\dotnet-UoW-Example\RepoWithUoW.API\bin\Debug\net9.0\Microsoft.Extensions.Identity.Stores.dll

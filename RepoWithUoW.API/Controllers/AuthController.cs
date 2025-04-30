@@ -44,6 +44,35 @@ public class AuthController : ControllerBase
         return Ok(new { message = "Registration Successful" });
     }
 
+    // login method that sets a HttpOnly cookie:
+    // [EnableCors("Development")]
+    // [HttpPost("login")]
+    // public async Task<IActionResult> Login(LoginDTO existingUser)
+    // {
+    //     if(!ModelState.IsValid) return BadRequest(ModelState);
+
+    //     var user = await _userManager.FindByEmailAsync(existingUser.Email);
+
+    //     if(user == null || !await _userManager.CheckPasswordAsync(user, existingUser.Password))
+    //     {
+    //         return Unauthorized("Invalid Credentials!");
+    //     }
+
+    //     var token = await _authService.GenerateToken(user);
+    //     // chrome.exe --user-data-dir="C://Chrome dev session" --disable-web-security
+    //     // if in dev environment, we need to open chrome with CORS disabled to get this to work 
+    //     Response.Cookies.Append("AuthToken", token, new CookieOptions
+    //     {
+    //         HttpOnly = true, // prevents access via JS
+    //         Secure = true, // ensures cookie is sent over HTTPS
+    //         SameSite = SameSiteMode.None, // prevent cross-site requests, should be on strict normally, since we are in a dev environment and hosting/making requests from same IP, we need to set to None
+    //         Expires = DateTimeOffset.UtcNow.AddHours(1) // set expiration time 
+    //     });
+
+    //     return Ok(new { message = "Login successful" });
+    // }
+
+    // login method that will return the token so the browser can store in localstorage 
     [EnableCors("Development")]
     [HttpPost("login")]
     public async Task<IActionResult> Login(LoginDTO existingUser)
@@ -58,16 +87,8 @@ public class AuthController : ControllerBase
         }
 
         var token = await _authService.GenerateToken(user);
-        // chrome.exe --user-data-dir="C://Chrome dev session" --disable-web-security
-        // if in dev environment, we need to open chrome with CORS disabled to get this to work 
-        Response.Cookies.Append("AuthToken", token, new CookieOptions
-        {
-            HttpOnly = true, // prevents access via JS
-            Secure = true, // ensures cookie is sent over HTTPS
-            SameSite = SameSiteMode.Strict, // prevent cross-site requests, should be on strict normally
-            Expires = DateTimeOffset.UtcNow.AddHours(1) // set expiration time 
-        });
+       
 
-        return Ok(new { message = "Login successful" });
+        return Ok(new { message = token });
     }
 }
